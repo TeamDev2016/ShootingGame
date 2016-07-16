@@ -1,4 +1,4 @@
-node-shooting-demo
+node-shooting
 
 ##操作方法
 十字キーで操作。
