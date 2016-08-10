@@ -1,6 +1,6 @@
 
 /**
- * Module dependencies.
+ * 設定等
  */
 "use strict";
 var express = require('express')
@@ -9,7 +9,6 @@ var express = require('express')
   , path = require('path');
 
 var app = express();
-
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);

@@ -1,24 +1,114 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   overflow:hidden;
+  background-color: #000000;
 }
 
 a {
-  color: #00B7FF;
+  font-size: 24px;
+  color: #FF0000;
+}
+
+* { margin: 0; padding: 0; border: 0; }
+
+#loading{
+  text-align: center;
+  overflow: hidd0en;
+  position: relative;
+  z-index: 0;
+  color: #FFFFFF;
+  visibility: visible;
+}
+
+#wrapper{
+	min-width: 1024px;
+  min-height: 768px;
+	overflow: hidden;
+	position: relative;
+  background-image: url(/images/bg.png);
+  background-repeat: no-repeat;
+  background-position:  center;
+  visibility: hidden;
+}
+
+.logo{
+	margin: 127px auto;
+	text-align: center;
+	z-index: 2;
+	opacity: 1;
+}
+
+img-logo {
+  width: 600px;
+  height: 211px;
+}
+
+.click{
+	position: relative;;
+  top: 50%;
+  width: 100%;
+	text-align: center;
+	z-index: 3;
+	opacity: 1;
+	color: #FFFFFF;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	text-shadow: 0px 0px 1px #6666666, 0px 0px 5px #666666, 0px 0px 6px #666666;
+  cursor: pointer;
+}
+
+.fade{
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-direction: normal;
+  -webkit-animation-delay: 0s;
+}
+
+@-webkit-keyframes 'fade' {
+  0%{
+    opacity:0;
+  }
+	70%{
+    opacity:0;
+  }
+  100%{
+    opacity:1;
+  }
+}
+
+.flash{
+  font-size: 24px;
+  -webkit-animation-name: flash;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-delay: 0s;
+}
+
+@-webkit-keyframes 'flash' {
+  0%{
+    opacity:0.2;
+  }
+  50%{
+    opacity:1;
+  }
+	100%{
+    opacity:0.2;
+  }
 }
 
 img.player{
-	width:50px;
-	height:50px;
-	position:absolute;
-	top:0;
-	left:0;
+  width: 50px;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 img.bullet{
-	width:10px;
-	height:10px;
-	position:absolute;
-	top:-100px;
-	left:-100px;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	top: -100px;
+	left: -100px;
 }

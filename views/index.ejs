@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Shootingサンプル</title>
+    <title>マルチインベーダーゲーム</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-	<script src="/javascripts/jquery-1.8.0.min.js"></script>
+	  <script src="/javascripts/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript">
+    window.onload = function() {
+
+      $(".flash").click(function(e){
+        location.href = '/game';
+      });
+
+      $(".fade").addClass('fade').on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function(){
+         $("#loading").css("visibility", "hidden");
+         $("#wrapper").css("visibility", "visible");
+      });
+
+    }
+    </script>
   </head>
   <body>
-    <h1>Shootingサンプル</h1>
-    <p><a href="/game">Start</a></p>
+    <div id="wrapper">
+      <div class="logo fade"><img class="img-logo" src="images/logo.png"></div>
+      <div id="loading"><img src="images/loader.gif"></div>
+      <div class="click fade"><span class="flash">Start Game</span></div>
+    </div>
   </body>
 </html>
