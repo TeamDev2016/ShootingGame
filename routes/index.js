@@ -12,3 +12,6 @@ exports.game = function(req, res){
 exports.gameover = function(req, res){
 	res.render('gameover');
 };
+exports.gameclear = function(req, res){
+  res.render('gameclear');
+}

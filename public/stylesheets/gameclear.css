@@ -1,0 +1,19 @@
+.text-gameclear{
+	margin: 127px auto;
+	text-align: center;
+}
+
+.btn-screen-transition{
+	top: 50%;
+	width: 100%;
+	text-align: center;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.btn-screen-transition > a{
+  cursor: pointer;
+}
+
+.btn-screen-transition > a:nth-child(n + 2){
+	margin-left: 50px;
+}

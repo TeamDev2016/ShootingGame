@@ -5,19 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/common.css' />
     <link rel='stylesheet' href='/stylesheets/start-screen.css' />
 	  <script src="/javascripts/jquery-3.1.0.min.js"></script>
-    <script type="text/javascript">
-      window.onload = function() {
-        $(".flash").click(function(e){
-          location.href = '/game';
-        });
-
-        $(".fade").addClass('fade').on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function(){
-           $("#loading").css("visibility", "hidden");
-           $("#wrapper").css("visibility", "visible");
-        });
-
-      }
-    </script>
+    <script src="/javascripts/start-screen.js"></script>
   </head>
   <body>
     <div id="wrapper">
