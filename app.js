@@ -30,6 +30,7 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/game', routes.game);
 app.get('/gameover', routes.gameover);
+app.get('/gameclear', routes.gameclear);
 
 // サーバ生成
 var server = http.createServer(app);
