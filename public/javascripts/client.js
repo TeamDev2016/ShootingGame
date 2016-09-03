@@ -3,6 +3,14 @@ jQuery(function($) {
 	var _socket = io.connect('http://'+location.host+'/');
 	var _userMap = {};
 	var _bulletMap = {};
+	var enemyId = 0;
+	var enemyCount = 0;
+	var elapsedTime = 0;
+	// 敵表示時間　3秒～5秒
+	var enemyDispTime = Math.floor(Math.random()*2 + 3)*1000;
+	var width = $(window).width();
+	var height = $(window).height();
+
 
 	/***
 	 *  プレイヤーの生成および更新
@@ -74,6 +82,8 @@ jQuery(function($) {
 	var _keyMap = [];
 	var _player = {x:Math.random()*1000|0,y:Math.random()*500|0,v:0,rotate:0,element:$('#my-player')};
 	var _bullet = {x:-100,y:-100,v:0,rotate:0,element:$('#my-bullet')};
+	var _enemy = {x:Math.random()*1000|0,y:Math.random()*500|0,v:0,rotate:0,element:$('#enemy')};
+
 
   // 位置情報の更新
 	var updatePosition = function(unit){
@@ -172,4 +182,50 @@ jQuery(function($) {
 		}
 		_keyMap[e.keyCode] = false;
 	});
+
+	// 一秒ごとに経過時間を取得する。
+	setInterval(function(){ getElapsedTime() },1000);
+	// 敵位置の更新
+	setTimeout(function(){updatePositionEnemy()});
+
+	function createEnemy() {
+		enemyId++;
+
+		// 敵キャラクターの出現位置を生成する。
+		var enemy = {x:Math.random()*width|0,y:Math.random()*500|0,v:0,rotate:0};
+
+		// 敵の生成
+		enemy.element = $('<img src="/images/mascot.jpg" class="enemy" />')
+			.attr('id', "enemyId" + enemyId);
+		$('#bg').append(enemy.element);
+
+		updateCss(enemy);
+
+		// 敵表示時間　3秒から5秒の間で表示させる。
+		enemyDispTime = Math.floor(Math.random()*2 + 3)*1000;
+		elapsedTime = 0;
+		enemyCount++;
+	}
+
+	/***
+	 * 経過時間取得
+	 **/
+	function getElapsedTime() {
+		elapsedTime += 1000;
+		// 経過時間と敵表示時間が同じになった場合、敵を表示させる。
+		if (elapsedTime == enemyDispTime && enemyCount < 10) {
+			createEnemy();
+		}
+	}
+
+	// 実装途中
+	function updatePositionEnemy() {
+		$("#enemyId1").animate({
+			left:  width	　//要素を動かす位置
+	  }, 3000).animate({
+			left: "-50px"　//要素を戻す位置
+	  }, 0);
+
+		setTimeout(function(){updatePositionEnemy()}, 3000);//アニメーションを繰り返す間隔
+	}
 });
