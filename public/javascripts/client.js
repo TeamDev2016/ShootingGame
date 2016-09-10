@@ -199,6 +199,7 @@ jQuery(function($) {
 			.attr('id', "enemyId" + enemyId);
 		$('#bg').append(enemy.element);
 
+		$('#enemyId' + enemyId).on('load',function(){updatePositionEnemy(enemyId)});
 		updateCss(enemy);
 
 		// 敵表示時間　3秒から5秒の間で表示させる。
@@ -218,14 +219,16 @@ jQuery(function($) {
 		}
 	}
 
-	// 実装途中
-	function updatePositionEnemy() {
-		$("#enemyId1").animate({
-			left:  width	　//要素を動かす位置
+	// 敵の動作（横方向に動く）
+	function updatePositionEnemy(enemyId) {
+		var dispHeight = Math.floor(Math.random()*height);
+		$("#enemyId" + enemyId).animate({
+			left:  width	//要素を動かす位置
 	  }, 3000).animate({
-			left: "-50px"　//要素を戻す位置
-	  }, 0);
-
-		setTimeout(function(){updatePositionEnemy()}, 3000);//アニメーションを繰り返す間隔
+			left: "-50px"	//要素を戻す位置
+	  }, 0).animate({
+			top: dispHeight	//縦位置の初期値
+		}, 0);
+		setTimeout(function(){updatePositionEnemy(enemyId)}, 3000);//アニメーションを繰り返す間隔
 	}
 });
