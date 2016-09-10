@@ -43,39 +43,39 @@ start();
 
 // 画像の配置
 function start(){
-  getWindowSize();
-  var rangeSize = maxSize - minSize + 1;
-  for( i = 0; i < num; i++ ){
-    var j = i % imgs.length;
-    imgSize[i] = Math.floor(Math.random() * rangeSize) + minSize;
-    posX[i] = Math.floor(Math.random() * (winX - maxSize));
-    posY[i] = Math.floor(Math.random() * (winY - maxSize));
-    opacity[i] = Math.floor(Math.random() * 40 + 70);
-    hr[i] = 0;
-    vr[i] = 0;
-    flg[i] = 0;
+    getWindowSize();
+    var rangeSize = maxSize - minSize + 1;
+    for( i = 0; i < num; i++ ){
+        var j = i % imgs.length;
+        imgSize[i] = Math.floor(Math.random() * rangeSize) + minSize;
+        posX[i] = Math.floor(Math.random() * (winX - maxSize));
+        posY[i] = Math.floor(Math.random() * (winY - maxSize));
+        opacity[i] = Math.floor(Math.random() * 40 + 70);
+        hr[i] = 0;
+        vr[i] = 0;
+        flg[i] = 0;
 
-    document.write(
-      "<div id='Lay" + i + "' " +
-      "style='position : fixed; " +
-      "left : " + posX[i] + "px; " +
-      "top  : " + posY[i] + "px; " +
-      "width  : " + imgSize[i] + "px; " +
-      "height : " + imgSize[i] + "px; " +
-      "z-index : 1;'>");
+        document.write(
+            "<div id='Lay" + i + "' " +
+            "style='position : fixed; " +
+            "left : " + posX[i] + "px; " +
+            "top  : " + posY[i] + "px; " +
+            "width  : " + imgSize[i] + "px; " +
+            "height : " + imgSize[i] + "px; " +
+            "z-index : 1;'>");
 
-    document.write(
-      "<img onmouseover='moveT(" + i + ")' " +
-      "src='" + path + imgs[j] + "' "+
-      "width='"  + imgSize[i] + "' " +
-      "height='" + imgSize[i] + "' " +
-      "style='cursor : pointer; " +
-      "filter : Alpha(opacity=" + opacity[i] + "); " +
-      "-moz-opacity :" + opacity[i] / 100 + "; " +
-      "opacity :" + opacity[i] / 100 + ";'>" );
-    document.write("</div>");
-    obj[i] = document.getElementById('Lay' + i).style;
-  }
+        document.write(
+              "<img onmouseover='moveT(" + i + ")' " +
+              "src='" + path + imgs[j] + "' "+
+              "width='"  + imgSize[i] + "' " +
+              "height='" + imgSize[i] + "' " +
+              "style='cursor : pointer; " +
+              "filter : Alpha(opacity=" + opacity[i] + "); " +
+              "-moz-opacity :" + opacity[i] / 100 + "; " +
+              "opacity :" + opacity[i] / 100 + ";'>" );
+        document.write("</div>");
+        obj[i] = document.getElementById('Lay' + i).style;
+    }
 }
 
 // マウスオーバイベント

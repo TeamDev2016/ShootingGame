@@ -1,17 +1,17 @@
 
-/*
- * GET home page.
- */
+/**
+ * routes
+ **/
 
 exports.index = function(req, res){
-  res.render('index');
+    res.render('index');
 };
 exports.game = function(req, res){
-  res.render('game');
+    res.render('game');
 };
 exports.gameover = function(req, res){
-	res.render('gameover');
+    res.render('gameover');
 };
 exports.gameclear = function(req, res){
-  res.render('gameclear');
+    res.render('gameclear');
 }
