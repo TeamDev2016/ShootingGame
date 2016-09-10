@@ -199,7 +199,7 @@ jQuery(function($) {
       .attr('id', "enemyId" + enemyId);
     $('#bg').append(enemy.element);
 
-    var updatePositionNo = Math.floor(Math.random()*2);
+    var updatePositionNo = Math.floor(Math.random()*3);
     $('#enemyId' + enemyId).on('load',function(){updatePositionEnemy(enemyId,updatePositionNo)});
     updateCss(enemy);
 
