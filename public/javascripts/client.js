@@ -24,15 +24,13 @@ jQuery(function($) {
             // ユーザ生成
             user = {x:0,y:0,v:0,rotate:0,userId:data.userId};
             // TODO 画像を変更する
-            user.element = $('<img src="/images/unit.png" class="player" />')
-                .attr('data-user-id',user.userId);
+            user.element = $('<img src="/images/unit.png" class="player" />').attr('data-user-id',user.userId);
             $('body').append(user.element);
             _userMap[data.userId] = user;
 
             // 弾生成
             var bullet = {x:-100,y:-100,v:0,rotate:0,userId:data.userId};
-            bullet.element = $('<img src="/images/bullet.png" class="bullet" />')
-                .attr('data-user-id',user.userId);
+            bullet.element = $('<img src="/images/bullet.png" class="bullet" />').attr('data-user-id',user.userId);
             $('body').append(bullet.element);
 
             _bulletMap[data.userId] = bullet;
@@ -64,8 +62,8 @@ jQuery(function($) {
     });
 
     /***
-      *  ユーザのサーバへの接続の切断
-      **/
+     *  ユーザのサーバへの接続の切断
+     **/
     _socket.on('disconnect-user',function(data){
         var user = _userMap[data.userId];
         if(user !== undefined){
@@ -85,7 +83,7 @@ jQuery(function($) {
     var _enemy = {x:Math.random()*1000|0,y:Math.random()*500|0,v:0,rotate:0,element:$('#enemy')};
 
 
-  // 位置情報の更新
+    // 位置情報の更新
     var updatePosition = function(unit){
         unit.x += unit.v* Math.cos(unit.rotate * Math.PI /180);
         unit.y += unit.v* Math.sin(unit.rotate * Math.PI /180);
@@ -135,7 +133,7 @@ jQuery(function($) {
             });
         }
 
-  // 位置情報の更新
+        // 位置情報の更新
         _player.v *= 0.95;
         updatePosition(_player);
         var w_width = $(window).width();
@@ -155,8 +153,8 @@ jQuery(function($) {
 
             // 衝突判定
             if(_player.x < bullet.x && bullet.x <_player.x + 50 &&
-            _player.y < bullet.y && bullet.y <_player.y + 50){
-                location.href = '/gameover';
+                _player.y < bullet.y && bullet.y <_player.y + 50){
+                    location.href = '/gameover';
             }
         }
         updateCss(_bullet);
@@ -170,7 +168,7 @@ jQuery(function($) {
     var _isSpaceKeyUp = true;
     setTimeout(f, 30);
 
-  // キーボード監視
+    // キーボード監視
     $(window).keydown(function(e){
         _keyMap[e.keyCode] = true;
     });
@@ -195,11 +193,11 @@ jQuery(function($) {
         var enemy = {x:Math.random()*width|0,y:Math.random()*500|0,v:0,rotate:0};
 
         // 敵の生成
-        enemy.element = $('<img src="/images/mascot.jpg" class="enemy" />')
-            .attr('id', "enemyId" + enemyId);
+        enemy.element = $('<img src="/images/mascot.jpg" class="enemy" />').attr('id', "enemyId" + enemyId);
         $('#bg').append(enemy.element);
 
-        $('#enemyId' + enemyId).on('load',function(){updatePositionEnemy(enemyId)});
+        var updatePositionNo = Math.floor(Math.random()*3);
+        $('#enemyId' + enemyId).on('load',function(){updatePositionEnemy(enemyId,updatePositionNo)});
         updateCss(enemy);
 
         // 敵表示時間　3秒から5秒の間で表示させる。
@@ -219,16 +217,37 @@ jQuery(function($) {
         }
     }
 
-    // 敵の動作（横方向に動く）
-    function updatePositionEnemy(enemyId) {
-        var dispHeight = Math.floor(Math.random()*height);
-        $("#enemyId" + enemyId).animate({
-            left:  width    //要素を動かす位置
-      }, 3000).animate({
-            left: "-50px"    //要素を戻す位置
-        }, 0).animate({
-            top: dispHeight    //縦位置の初期値
-        }, 0);
-        setTimeout(function(){updatePositionEnemy(enemyId)}, 3000);//アニメーションを繰り返す間隔
+    /***
+     * 敵の移動処理
+     * @param enemyId 敵ＩＤ
+     * @param updatePositionNo 移動処理番号
+     * updatePositionNo = 1の場合、横方向に動く
+     * updatePositionNo = 2の場合、縦方向に動く
+     **/
+    function updatePositionEnemy(enemyId, updatePositionNo) {
+        if (updatePositionNo == 1) {
+            var dispHeight = Math.floor(Math.random()*height);
+            $("#enemyId" + enemyId).animate({
+                left:  width  //要素を動かす位置
+            }, 3000).animate({
+                left: "-50px"  //要素を戻す位置
+            }, 0).animate({
+                top: dispHeight  //縦位置の初期値
+            }, 0);
+            setTimeout(function(){updatePositionEnemy(enemyId,updatePositionNo)}, 3000);//アニメーションを繰り返す間隔
+        }
+
+        if (updatePositionNo == 2) {
+            var dispLeft = Math.floor(Math.random()*width);
+            $("#enemyId" + enemyId).animate({
+                top: height  //要素を動かす位置
+            }, 3000).animate({
+                top: "-50px"  //要素を戻す位置
+            }, 0).animate({
+                left: dispLeft  //横位置の初期値
+            }, 0);
+            setTimeout(function(){updatePositionEnemy(enemyId,updatePositionNo)}, 3000);//アニメーションを繰り返す間隔
+        }
+
     }
 });
