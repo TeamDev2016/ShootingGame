@@ -226,7 +226,7 @@ jQuery(function($) {
 			left:  width	//要素を動かす位置
 	  }, 3000).animate({
 			left: "-50px"	//要素を戻す位置
-	  }, 0).animate({
+		}, 0).animate({
 			top: dispHeight	//縦位置の初期値
 		}, 0);
 		setTimeout(function(){updatePositionEnemy(enemyId)}, 3000);//アニメーションを繰り返す間隔
