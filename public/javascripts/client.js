@@ -144,6 +144,16 @@ jQuery(function($) {
         if(_player.y > w_height){_player.y = -50;}
 
         updatePosition(_bullet);
+        updateCss(_bullet);
+        $("[id^=enemyId]").each(function() {
+          // 衝突判定
+          var enemyX = parseInt($(this).css("left"), 10);
+          var enemyY = parseInt($(this).css("top"), 10);
+          if(enemyX < _bullet.x && _bullet.x < enemyX + 50 &&
+              enemyY < _bullet.y && _bullet.y < enemyY + 50){
+                  location.href = '/gameclear';
+          }
+        });
 
         // 弾の位置情報の更新
         for(var key in _bulletMap){
@@ -151,11 +161,15 @@ jQuery(function($) {
             updatePosition(bullet);
             updateCss(bullet);
 
-            // 衝突判定
-            if(_player.x < bullet.x && bullet.x <_player.x + 50 &&
-                _player.y < bullet.y && bullet.y <_player.y + 50){
-                    location.href = '/gameover';
-            }
+            $("[id^=enemyId]").each(function() {
+              // 衝突判定
+              var enemyX = parseInt($(this).css("left"), 10);
+              var enemyY = parseInt($(this).css("top"), 10);
+              if(enemyX < bullet.x && bullet.x < enemyX + 50 &&
+                  enemyY < bullet.y && bullet.y < enemyY + 50){
+                      location.href = '/gameclear';
+              }
+            });
         }
         updateCss(_bullet);
         updateCss(_player);
