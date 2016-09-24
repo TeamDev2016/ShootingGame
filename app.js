@@ -49,6 +49,9 @@ io.sockets.on('connection',function(socket){
     socket.on('bullet-create',function(data){
         socket.broadcast.json.emit('bullet-create',{userId:socket.handshake.userId,data:data});
     });
+    socket.on('bullet-hit',function(data){
+        socket.broadcast.json.emit('bullet-hit',{userId:socket.handshake.userId,data:data});
+    });
     socket.on('disconnect',function(){
         socket.broadcast.json.emit('disconnect-user',{userId:socket.handshake.userId});
     });

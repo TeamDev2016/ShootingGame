@@ -23,7 +23,6 @@ jQuery(function($) {
             console.log('create user '+data.userId , data);
             // ユーザ生成
             user = {x:0,y:0,v:0,rotate:0,userId:data.userId};
-            // TODO 画像を変更する
             user.element = $('<img src="/images/unit.png" class="player" />').attr('data-user-id',user.userId);
             $('body').append(user.element);
             _userMap[data.userId] = user;
@@ -62,6 +61,13 @@ jQuery(function($) {
     });
 
     /***
+     *  敵への着弾時の同期処理
+     **/
+    _socket.on('bullet-hit',function(){
+        location.href = '/gameclear';
+    });
+
+    /***
      *  ユーザのサーバへの接続の切断
      **/
     _socket.on('disconnect-user',function(data){
@@ -81,7 +87,6 @@ jQuery(function($) {
     var _player = {x:Math.random()*1000|0,y:Math.random()*500|0,v:0,rotate:0,element:$('#my-player')};
     var _bullet = {x:-100,y:-100,v:0,rotate:0,element:$('#my-bullet')};
     var _enemy = {x:Math.random()*1000|0,y:Math.random()*500|0,v:0,rotate:0,element:$('#enemy')};
-
 
     // 位置情報の更新
     var updatePosition = function(unit){
@@ -145,13 +150,15 @@ jQuery(function($) {
 
         updatePosition(_bullet);
         updateCss(_bullet);
+
         $("[id^=enemyId]").each(function() {
-          // 衝突判定
+          // 衝突判定(自弾)
           var enemyX = parseInt($(this).css("left"), 10);
           var enemyY = parseInt($(this).css("top"), 10);
           if(enemyX < _bullet.x && _bullet.x < enemyX + 50 &&
               enemyY < _bullet.y && _bullet.y < enemyY + 50){
-                  location.href = '/gameclear';
+                _socket.emit('bullet-hit');
+                location.href = '/gameclear';
           }
         });
 
@@ -162,12 +169,13 @@ jQuery(function($) {
             updateCss(bullet);
 
             $("[id^=enemyId]").each(function() {
-              // 衝突判定
+              // 衝突判定（他プレイヤーの弾）
               var enemyX = parseInt($(this).css("left"), 10);
               var enemyY = parseInt($(this).css("top"), 10);
               if(enemyX < bullet.x && bullet.x < enemyX + 50 &&
                   enemyY < bullet.y && bullet.y < enemyY + 50){
-                      location.href = '/gameclear';
+                    _socket.emit('bullet-hit');
+                    location.href = '/gameclear';
               }
             });
         }
