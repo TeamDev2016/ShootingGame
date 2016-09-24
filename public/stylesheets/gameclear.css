@@ -1,19 +1,37 @@
-.text-gameclear{
-	margin: 127px auto;
-	text-align: center;
+.text-gameclear {
+    margin: 127px auto;
+    text-align: center;
 }
 
-.btn-screen-transition{
-	top: 50%;
-	width: 100%;
-	text-align: center;
-	font-family: Georgia, "Times New Roman", Times, serif;
+.btn-screen-transition {
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-.btn-screen-transition > a{
-  cursor: pointer;
+.btn-screen-transition > a {
+    cursor: pointer;
 }
 
-.btn-screen-transition > a:nth-child(n + 2){
-	margin-left: 50px;
+.btn-screen-transition > a:nth-child(n + 2) {
+    margin-left: 50px;
+}
+
+a.btn {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid white;
+}
+
+a.btn:hover {
+    color: black;
+    background-color: white;
 }
